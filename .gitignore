@@ -1,0 +1,12 @@
+/.idea
+/nbproject
+node_modules/
+
+/api-gateway
+/app-orders/run-in-docker.sh
+/app-payments/run-in-docker.sh
+/app-web-ui
+/dat
+/etc
+/README.md
+/docker-compose.yml
