@@ -2,7 +2,7 @@
 /nbproject
 node_modules/
 
-/api-gateway
+/api-gateway/run-in-docker.sh
 /app-orders/run-in-docker.sh
 /app-payments/run-in-docker.sh
 /app-web-ui
