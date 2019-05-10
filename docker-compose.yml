@@ -1,0 +1,79 @@
+version: '2'
+
+networks:
+    main:
+
+services:
+
+    spa:
+        build: ./etc
+        command: /app.sh
+        volumes:
+            - ./app-web-ui/run-in-docker.sh:/app.sh
+            - ./etc/nginx/default.conf:/etc/nginx/sites-available/default
+            - ../app-web-ui:/app
+        extra_hosts:
+            - "app.local:127.0.0.1"
+        ports:
+            - "8080:80"
+
+
+    api:
+        build: ./etc
+        command: /app.sh
+        volumes:
+            - ./api-gateway/run-in-docker.sh:/app.sh
+            - .:/app
+        extra_hosts:
+            - "app.local:127.0.0.1"
+        networks:
+            main:
+                aliases:
+                    - api.app.local
+        ports:
+            - "8081:8080"
+
+
+    app-orders:
+        build: ./etc
+        command: /app.sh
+        volumes:
+            - ./app-orders/run-in-docker.sh:/app.sh
+            - ./app-orders:/app/app-orders
+            - ./lib:/app/lib
+        networks:
+            main:
+                aliases:
+                    - app-orders.app.local
+
+
+    app-payments:
+        build: ./etc
+        command: /app.sh
+        volumes:
+            - ./app-payments/run-in-docker.sh:/app.sh
+            - ./app-payments:/app/app-payments
+            - ./lib:/app/lib
+        networks:
+            main:
+                aliases:
+                    - app-payments.app.local
+
+
+    mongodb:
+        image: mongo
+        volumes:
+            ## Mounted data directory would normally work on *nix along with its native filesystems ;)
+            #- ./dat/mongodb:/data/db
+            #- ./dat/mongodb:/var/lib/mongodb
+            - ./etc/mongodb/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: "admin"
+            MONGO_INITDB_ROOT_PASSWORD: "qwerty"
+            MONGO_INITDB_DATABASE: "test"
+        networks:
+            main:
+                aliases:
+                    - mongodb.app.local
+        ports:
+            - "27017:27017"
