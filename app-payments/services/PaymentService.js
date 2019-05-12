@@ -15,7 +15,8 @@ export default class {
 		// Mock some processing activity with randomized behaviour
 		const process = new Promise((resolve, reject) => {
 		  setTimeout(() => {
-			  if (Math.random() >= 0.5) {
+			  // Succeed with about 70% of probability
+			  if (Math.random() >= 0.3) {
 				  resolve('confirmed');
 			  } else {
 				  reject('cancelled');

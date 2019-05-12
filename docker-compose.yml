@@ -11,7 +11,7 @@ services:
         volumes:
             - ./app-web-ui/run-in-docker.sh:/app.sh
             - ./etc/nginx/default.conf:/etc/nginx/sites-available/default
-            - ../app-web-ui:/app
+            - ./app-web-ui:/app
         extra_hosts:
             - "app.local:127.0.0.1"
         ports:

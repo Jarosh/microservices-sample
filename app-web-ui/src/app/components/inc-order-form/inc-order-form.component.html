@@ -1,0 +1,25 @@
+<div class="mt-5 text-center">
+    <input
+        type="text"
+        class="form-control"
+        placeholder="Order summary..."
+        [(ngModel)]='summary'
+        />
+    <br/>
+    <tag-input
+        [(ngModel)]='items'
+        [editable]='true'
+        [placeholder]="'+ Order Item'"
+        [secondaryPlaceholder]="'Type and press enter to add'"
+        (onTagEdited)="onTagEdited($event)"
+        >
+    </tag-input>
+    <br/>
+    <button class="btn btn-success" (click)="onSubmit()">
+        Place an Order
+    </button>
+    &nbsp;
+    <button class="btn btn-danger" (click)="onCancel()">
+        Cancel
+    </button>
+</div>

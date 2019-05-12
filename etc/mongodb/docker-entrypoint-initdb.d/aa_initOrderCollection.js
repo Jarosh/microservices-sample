@@ -9,7 +9,7 @@ db.createCollection('Order', {
 					description: 'must be a string and is required'
 				},
 				state: {
-					enum: [ 'created', 'confirmed', 'delivered', 'cancelled' ],
+					enum: [ 'created', 'cancelled', 'confirmed', 'delivered' ],
 					description: 'must contain a supported value'
 				},
 				items: {

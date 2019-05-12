@@ -1,0 +1,20 @@
+<div class="container-fluid mt-4">
+    <inc-order-form
+        *ngIf="isOrderFormVisible"
+        (submit)="onCreateOrder($event)"
+        (cancel)="onHideNewOrderForm()"
+        >
+    </inc-order-form>
+    <div class="text-center">
+        <button
+            *ngIf="!isOrderFormVisible"
+            class="btn btn-primary"
+            (click)="onShowNewOrderForm()"
+            >
+            Place new Order
+        </button>
+    </div>
+    <div *ngFor="let order of orders$.asObservable() | async">
+        <inc-order-item [order]="order"></inc-order-item>
+    </div>
+</div>

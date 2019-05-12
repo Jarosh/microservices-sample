@@ -1,0 +1,48 @@
+<div>
+    <div class="mt-4 mb-4 text-center">
+        <a [routerLink]="['/']">Back to Orders List</a>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-5 text-right font-weight-bold">Order ID:</div>
+            <div class="col-7">{{ order._id }}</div>
+        </div>
+        <div class="row">
+            <div class="col-5 text-right font-weight-bold">Created:</div>
+            <div class="col-7">{{ moment(order.created_at) }}</div>
+        </div>
+        <div *ngIf="order.created_at !== order.updated_at" class="row">
+            <div class="col-5 text-right font-weight-bold">Updated:</div>
+            <div class="col-7">{{ moment(order.updated_at) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-5 text-right font-weight-bold">State:</div>
+            <div class="col-7">
+                <span [ngClass]="getOrderStateClasses(['font-weight-bold'])">
+                    {{ order.state }}
+                </span>
+            </div>
+        </div>
+        <div *ngIf="order.summary" class="row">
+            <div class="col-5 text-right font-weight-bold">Summary:</div>
+            <div class="col-7">{{ order.summary }}</div>
+        </div>
+        <div *ngIf="order.items.length" class="row">
+            <div class="col-5 text-right font-weight-bold">Order items:</div>
+            <div class="col-7">
+                <ul>
+                    <li *ngFor="let item of order.items">
+                        {{ item }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div *ngIf="order.state !== 'delivered'" class="row mt-4">
+            <div class="col-12 text-center">
+                <button class="btn btn-danger" (click)="deleteOrder()">
+                    Delete order
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

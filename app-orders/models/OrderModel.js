@@ -17,7 +17,7 @@ const { Schema } = mongoose;
  *         required: true
  *       state:
  *         type: string
- *         enum: [ created, confirmed, delivered, cancelled ]
+ *         enum: [ created, cancelled, confirmed, delivered ]
  *         required: true
  *       created_at:
  *         type: string
@@ -49,7 +49,7 @@ const orderSchema = new Schema({
 		required: true,
 		type: String,
 		index: true,
-		enum: [ 'created', 'confirmed', 'delivered', 'cancelled' ],
+		enum: [ 'created', 'cancelled', 'confirmed', 'delivered' ],
 		default: 'created'
 	},
 	items: [

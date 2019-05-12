@@ -1,0 +1,5 @@
+<div class="col-12 mt-5 mb-5 text-center">
+    <a [routerLink]="['order', order._id]">
+        Order <b>#{{ order._id }}</b> of {{ order.items && order.items.length || 0 }} item(s) created at <i>{{ moment(order.created_at) }}</i>
+    </a>
+</div>
